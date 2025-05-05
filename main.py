@@ -1,6 +1,7 @@
 from PyQt6.QtCore import (
     QSize,
-    Qt
+    Qt,
+    QThreadPool
 )
 from PyQt6.QtWidgets import (
     QApplication,
@@ -12,6 +13,8 @@ from PyQt6.QtWidgets import (
     QPushButton
 )
 
+from worker import Worker
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -19,7 +22,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('YouTube Downloader')
         self.resize(QSize(300, 100))
         self.label = QLabel('Place Link to Video')
-        self.result_label = QLabel('Result: ...')
+        self.result_label = QLabel('...')
         self.label.setContentsMargins(0,0,0,0)
         self.input = QLineEdit(parent=self)
 
@@ -39,11 +42,24 @@ class MainWindow(QMainWindow):
         container = QWidget()
         container.setLayout(parent_layout)
 
+        self.threadpool = QThreadPool()
+
+
         self.setCentralWidget(container)
 
-    def clicked_button(self):
-        self.result_label.setText(f'Result: {self.input.text()}')
+    def _result_signal(self):
+        self.result_label.setText('Video downloaded')
         self.input.setText('')
+
+    def _error_signal(self, error):
+        self.result_label.setText(f'Error: {error}')
+
+    def clicked_button(self):
+        self.result_label.setText(f'Downloading...')
+        worker = Worker(self.input.text())
+        worker.signals.result.connect(self._result_signal)
+        worker.signals.error.connect(self._error_signal)
+        self.threadpool.start(worker)
 
 
 app = QApplication([])
