@@ -1,0 +1,105 @@
+QMainWindow {
+    background-color: #1a1a1a;
+}
+
+QLabel {
+    color: #ecf0f1;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+QLineEdit {
+    padding: 8px;
+    border: 2px solid #34495e;
+    border-radius: 5px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    font-size: 12px;
+}
+
+QLineEdit:focus {
+    border: 2px solid #3498db;
+    background-color: #34495e;
+}
+
+QLineEdit:disabled {
+    background-color: #34495e;
+    color: #7f8c8d;
+}
+
+QLineEdit::placeholder {
+    color: #95a5a6;
+}
+
+QPushButton {
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+QPushButton:hover {
+    background-color: #2980b9;
+}
+
+QPushButton:pressed {
+    background-color: #2472a4;
+}
+
+QRadioButton {
+    color: #ecf0f1;
+    font-size: 12px;
+    spacing: 8px;
+}
+
+QRadioButton::indicator {
+    width: 15px;
+    height: 15px;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #3498db;
+    border: 2px solid #2980b9;
+    border-radius: 8px;
+}
+
+QRadioButton::indicator:unchecked {
+    background-color: #2c3e50;
+    border: 2px solid #34495e;
+    border-radius: 8px;
+}
+
+QFrame {
+    background-color: #2c3e50;
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid #34495e;
+}
+
+/* Custom classes */
+.success-label {
+    color: #2ecc71;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.error-label {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.info-label {
+    color: #3498db;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.neutral-label {
+    color: #95a5a6;
+    font-size: 12px;
+} 
