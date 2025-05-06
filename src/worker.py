@@ -7,7 +7,7 @@ from PyQt6.QtCore import (
     pyqtSlot
 )
 
-from downloader import Downloader
+import downloader
 
 
 class WorkerSignals(QObject):
@@ -16,15 +16,21 @@ class WorkerSignals(QObject):
 
 
 class Worker(QRunnable):
-    def __init__(self, url):
+    def __init__(self, url: str, download_path: str = None, format_type: str = 'mp4'):
         super().__init__()
         self.url = url
+        self.download_path = download_path
+        self.format_type = format_type
         self.signals = WorkerSignals()
 
     @pyqtSlot()
     def run(self):
         try:
-            Downloader(self.url).get_video()
+            downloader.Downloader(
+                self.url,
+                self.download_path,
+                self.format_type
+            ).get_video()
         except Exception as e:
             traceback.print_exc()
             self.signals.error.emit(str(e))
